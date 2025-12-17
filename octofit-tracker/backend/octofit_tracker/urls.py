@@ -30,14 +30,12 @@ router.register(r'leaderboard', LeaderboardViewSet)
 
 @api_view(['GET'])
 def api_root(request, format=None):
-    # Construir URLs absolutas usando el host de la request
-    base_url = request.build_absolute_uri('/')[:-1]
     return Response({
-        'teams': base_url + reverse('team-list'),
-        'users': base_url + reverse('user-list'),
-        'activities': base_url + reverse('activity-list'),
-        'workouts': base_url + reverse('workout-list'),
-        'leaderboard': base_url + reverse('leaderboard-list'),
+        'teams': reverse('team-list', request=request, format=format),
+        'users': reverse('user-list', request=request, format=format),
+        'activities': reverse('activity-list', request=request, format=format),
+        'workouts': reverse('workout-list', request=request, format=format),
+        'leaderboard': reverse('leaderboard-list', request=request, format=format),
     })
 
 urlpatterns = [
